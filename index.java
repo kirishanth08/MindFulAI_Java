@@ -1,25 +1,36 @@
-import java.util.ArrayList;
-import java.util.List;
 public class index {
     public static void main(String[] args) {
-        String[] words = {"abc","bcd","aaaa","cbc"};
+        String[] words = {"abc", "bcd", "aaaa", "cbc"};
+        char x = 'a';
 
-        List<Integer> indexes = findWordsWithA(words);
-        if (!indexes.isEmpty()) {
-            System.out.println("Indexes of words containing 'a': " + indexes);
-        } else {
-            System.out.println("No words containing 'a' found.");
+        int[] indices = findIndices(words, x);
+        System.out.print("Indices of words containing '" + x + "': [");
+        for (int i = 0; i < indices.length; i++) {
+            if (i > 0) {
+                System.out.print(", ");
+            }
+            System.out.print(indices[i]);
         }
+        System.out.println("]");
     }
 
-    public static List<Integer> findWordsWithA(String[] words) {
-        List<Integer> indexes = new ArrayList<>();
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].contains("a")) {
-                indexes.add(i);
+    public static int[] findIndices(String[] words, char x) {
+        int count = 0;
+        for (String word : words) {
+            if (word.contains(String.valueOf(x))) {
+                count++;
             }
         }
-        return indexes;
+
+        int[] indices = new int[count];
+        int index = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].contains(String.valueOf(x))) {
+                indices[index++] = i;
+            }
+        }
+
+        return indices;
     }
 }
 
